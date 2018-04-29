@@ -7,15 +7,17 @@ menu_title: Layout instructions
 menu_order: 2
 version: 2.0
 github_link: frontend-dev-guide/layouts/xml-instructions.md
+functional_areas:
+  - Frontend
 ---
 
 <h2 id="fedg_layout_xml-instruc_overview">What's in this topic</h2>
 
 
-Changing layout files is one of the two possible ways to customize page layout in Magento (the second way is altering templates). 
-To change the page wireframe, modify the <a href="{{page.baseurl}}frontend-dev-guide/layouts/layout-types.html#layout-types-page" target="_blank">page layout</a> files; all other customizations are performed in the <a href="{{page.baseurl}}frontend-dev-guide/layouts/layout-types.html#layout-types-conf" target="_blank">page configuration</a> or <a href="{{page.baseurl}}frontend-dev-guide/layouts/layout-types.html#layout-types-gen" target="_blank">generic layout</a> files. 
+Changing {% glossarytooltip 73ab5daa-5857-4039-97df-11269b626134 %}layout{% endglossarytooltip %} files is one of the two possible ways to customize page layout in Magento (the second way is altering templates). 
+To change the page wireframe, modify the <a href="{{page.baseurl}}/frontend-dev-guide/layouts/layout-types.html#layout-types-page" target="_blank">page layout</a> files; all other customizations are performed in the <a href="{{page.baseurl}}/frontend-dev-guide/layouts/layout-types.html#layout-types-conf" target="_blank">page configuration</a> or <a href="{{page.baseurl}}/frontend-dev-guide/layouts/layout-types.html#layout-types-gen" target="_blank">generic layout</a> files. 
 
-Use layout instructions to:
+Use {% glossarytooltip bcbc9bf8-3251-4b3c-a802-07417770af3b %}layout instructions{% endglossarytooltip %} to:
 
 
 *  move a page element to another parent element
@@ -23,7 +25,7 @@ Use layout instructions to:
 *  remove a page element
 <p></p>
 
-The basic set of instructions is the same for all types of layout files. This article describes these basic instructions; for details about how they are used in particular layout file type, please refer to the <a href="{{page.baseurl}}frontend-dev-guide/layouts/layout-types.html" target="_blank">Layout file types</a> article.
+The basic set of instructions is the same for all types of layout files. This article describes these basic instructions; for details about how they are used in particular layout file type, please refer to the <a href="{{page.baseurl}}/frontend-dev-guide/layouts/layout-types.html" target="_blank">Layout file types</a> article.
 
 
 <h2 id="fedg_layout_xml-instruc_ex">Common layout instructions</h2>
@@ -39,13 +41,14 @@ Use the following layout instructions to customize your layout:
 * <a href="#fedg_layout_xml-instruc_ex_rmv"><code>&lt;remove&gt;</code></a>
 *  <a href="#fedg_layout_xml-instruc_ex_upd"><code>&lt;update&gt;</code></a>
 *  <a href="#argument"><code>&lt;argument&gt;</code></a>
+*  <a href="#arguments"><code>&lt;arguments&gt;</code></a>
 
 <h3 id="fedg_layout_xml-instruc_ex_block">&lt;block></h3>
 
 Defines a block.
 
 <p><b>Details:</b> A block is a unit of page output that renders some distinctive content – a piece of information, a user interface element – anything visually tangible for the end-user.
-Blocks employ templates to generate HTML. Examples of blocks include a category list, a mini cart, product tags, and product listing.</p>
+Blocks employ templates to generate {% glossarytooltip a2aff425-07dd-4bd6-9671-29b7edefa871 %}HTML{% endglossarytooltip %}. Examples of blocks include a {% glossarytooltip 50e49338-1e6c-4473-8527-9e401d67ea2b %}category{% endglossarytooltip %} list, a mini cart, product tags, and product listing.</p>
 
 <table>
    <tbody>
@@ -184,7 +187,7 @@ This would add a new column to the page layout.
 
 <h3 id="fedg_xml-instrux_before-after">before and after attributes</h3>
 <p>To help you to position elements in a specific order suitable for design, SEO, usability, or other requirements, Magento software provides the <code>before</code> and <code>after</code> layout attributes.</p>
-<p>These optional attributes can be used in layout XML files to control the order of elements in their common parent.
+<p>These optional attributes can be used in layout {% glossarytooltip 8c0645c5-aa6b-4a52-8266-5659a8b9d079 %}XML{% endglossarytooltip %} files to control the order of elements in their common parent.
 
 The following tables give a detailed description of the results you can get using the <code>before</code> and <code>after</code> attributes. The first table uses a block a as positioned element.
 
@@ -257,7 +260,7 @@ The following tables give a detailed description of the results you can get usin
 
 <div class="bs-callout bs-callout-warning" id="info">
 <span class="glyphicon-class">
- <p>The <code>&lt;action&gt;</code> instruction is deprecated. If the method implementation allows, use the <a href="#argument"><code>&lt;argument&gt;</code></a> for <a href="#fedg_layout_xml-instruc_ex_block"><code>&lt;block&gt;</code></a> or <a href="#fedg_layout_xml-instruc_ex_ref"><code>&lt;referenceBlock&gt;</code></a> to access block public API.</p></span>
+ <p>The <code>&lt;action&gt;</code> instruction is deprecated. If the method implementation allows, use the <a href="#argument"><code>&lt;argument&gt;</code></a> for <a href="#fedg_layout_xml-instruc_ex_block"><code>&lt;block&gt;</code></a> or <a href="#fedg_layout_xml-instruc_ex_ref"><code>&lt;referenceBlock&gt;</code></a> to access block public {% glossarytooltip 786086f2-622b-4007-97fe-2c19e5283035 %}API{% endglossarytooltip %}.</p></span>
 </div>
 
 Calls public methods on the block API.
@@ -331,7 +334,7 @@ To pass parameters to a block use the <a href="#argument"><code>&lt;argument>&lt
 <ul>
 <li>The <code>remove</code> attribute is optional and its default value is false.</li>
 
-    This implementation allows you to cancel removal of a block or container in your layout by setting remove attribute value to false.
+    This implementation allows you to cancel removal of a block or container in your layout by setting remove attribute value to <code>true</code>
     
     Example: 
     
@@ -433,10 +436,10 @@ Used as follows:
 <update handle="{name_of_handle_to_include}"/>
 {%endhighlight xml%}
 
-The specified <a href="{{page.baseurl}}frontend-dev-guide/layouts/layout-overview.html#handle" target="_blank">handle</a> is "included" and executed recursively.
+The specified <a href="{{page.baseurl}}/frontend-dev-guide/layouts/layout-overview.html#handle" target="_blank">handle</a> is "included" and executed recursively.
 
 <h3 id="argument">&lt;argument&gt;</h3>
-Used to pass an argument. Must be always enclosed in [`<arguments></arguments>`](#arguments).
+Used to pass an argument. Must be always enclosed in<a href="#arguments"><code>&lt;arguments></code></a>.
  
 <table>
    <tbody>
@@ -487,7 +490,7 @@ To pass an argument that is an array use the following construction:
 </argument>
 {%endhighlight xml%}
 
-<p id="getter">Arguments values set in a layout file can be accessed in <a href="{{page.baseurl}}frontend-dev-guide/templates/template-overview.html" target="_blank">templates</a> using the <code>get{ArgumentName}()</code> and <code>has{ArgumentName}()</code> methods. The latter returns a boolean defining whether there's any value set. 
+<p id="getter">Arguments values set in a layout file can be accessed in <a href="{{page.baseurl}}/frontend-dev-guide/templates/template-overview.html" target="_blank">templates</a> using the <code>get{ArgumentName}()</code> and <code>has{ArgumentName}()</code> methods. The latter returns a boolean defining whether there's any value set. 
 <code>{ArgumentName}</code> is obtained from the <code>name</code> attribute the following way: for getting the value of <code>&lt;argument name="some_string"&gt;</code> the method name is <code>getSomeString()</code>.
 
 Example:
@@ -506,13 +509,13 @@ Using the value of <code>css_class</code> in <code><a href="{{site.mage2000url}}
 
 {%highlight php%}
 ...
-$cssClass = $this->getCssClass() ? ' ' . $this->getCssClass() : '';
+$cssClass = $this->hasCssClass() ? ' ' . $this->getCssClass() : '';
 ...
 {%endhighlight %}
 
-### <arguments> {#arguments}
+<h3 id="arguments">&lt;arguments&gt;</h3>
 
-`<arguments></arguments>` is a required container for `<argument></argument>`. Does not have own attributes.
+<code>&lt;arguments></code> is a required container for <code>&lt;argument></code>. It does not have its own attributes.
 
 Example:
 

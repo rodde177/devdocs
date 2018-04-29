@@ -1,14 +1,18 @@
 ---
 layout: default
 group: coding-standards
-subgroup: Coding standards
+subgroup: 01_Coding standards
 title: DocBlock standard
+landing-page: Coding standards
 menu_title: DocBlock standard
 menu_order: 4
 version: 2.0
 github_link: coding-standards/docblock-standard-general.md
 redirect_from: /guides/v1.0/coding-standards/docblock-standard-general.html
+functional_areas:
+  - Standards
 ---
+
 
 This standard defines Magento requirements and conventions for adding code inline documentation, known as *DocBlock*s.
 
@@ -37,7 +41,7 @@ The documentation should follow two simple principles:
 
 ### Short documentation
 
-The documentation should be as short as possible, but it should not skip necessary details.  
+The documentation should be as short as possible, but it should not skip necessary details.
 
 Below are ways of improving code to help simplify documentation:
 
@@ -45,7 +49,7 @@ Below are ways of improving code to help simplify documentation:
 * Put all possible information in the names of classes, methods, and variables. (e.g. use `$timeInSec` instead of `$time`)
 * Break down a method into smaller methods with descriptive names.
   See example below:
-  
+
   {% highlight php startinline=true %}
   public function getPrice()
   {
@@ -59,21 +63,21 @@ Below are ways of improving code to help simplify documentation:
   {
       // calculate base price
   }
-    
+
   private function getDiscount()
   {
     if (it's discount time) {
       return 10;
     }
     return 0;
-  } 
+  }
   {% endhighlight %}
 
 ### Include all the necessary details
 
 1. Identify the details a developer needs to work with your code.
 2. Ignore the implementation details (i.e. private methods/properties and method bodies) and focus on what the public interface signature provides.
-   
+
    If possible, improve the interface to provide more information.
 3. Add any remaining information that a developer may need to the DocBlock.
 
@@ -125,18 +129,18 @@ This section is applicable to Magento core files only. Please follow it if you a
 
 Any file in Magento source should have a header with license and copyright notice.
 Exceptions are files with format that doesn't support comments, and so no meta information can be added.
- 
+
 License notice and copyright MUST be declared in the very beginning of the file.
 If the file contains a structural element (for example, a class), description for the element should be declared as a separate DocBlock.
 
 Use the following templates for the license notice and copyright blocks:
 
-**Template for PHP Files**
- 
+**Template for {% glossarytooltip bf703ab1-ca4b-48f9-b2b7-16a81fd46e02 %}PHP{% endglossarytooltip %} Files**
+
 {% highlight php %}
 <?php
 /**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -153,14 +157,14 @@ interface MetadataObjectInterface
 }
 {% endhighlight %}
 
-**Template for XML Files**
+**Template for {% glossarytooltip 8c0645c5-aa6b-4a52-8266-5659a8b9d079 %}XML{% endglossarytooltip %} Files**
 
 {% highlight xml %}
 
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
@@ -171,7 +175,7 @@ interface MetadataObjectInterface
 {% highlight js %}
 
 /**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 {% endhighlight %}
@@ -277,7 +281,7 @@ If possible, add use cases where developers can or cannot use the class.
 {:#short-name-form}
 
 It is encouraged to use the short form of the name to encourage readability and consistency with the type hint.
-The only exception is in the `Service/DTO` classes due to tooling requirements.
+The only {% glossarytooltip 53da11f1-d0b8-4a7e-b078-1e099462b409 %}exception{% endglossarytooltip %} is in the `Service/DTO` classes due to tooling requirements.
 
 **Example of a Method DocBlock**
 
@@ -333,7 +337,7 @@ class Profiler
 Functions and methods must have:
 
 * Short description
-* Long description that explains the motivation behind the implementation. 
+* Long description that explains the motivation behind the implementation.
   For example:
 
    * If a workaround or hack is implemented, explain why it is necessary and include any other details necessary to understand the algorithm.
@@ -347,24 +351,28 @@ Functions and methods must have:
 * Declaration of possibly thrown exception using `@throws` tag, if the actual body of function triggers throwing an exception.
   All occurrences of `@throws` in a DocBlock must be after `@param` and `@return` (if any).
 
-Exceptions:
+**Exceptions to these rules:**
+
 * Constructors may not have short and/or long description
+
 * Testing methods in Unit tests may not have doc blocks if the test's method name follows the convention (test<MethodName>)
+
    * If the test does not follow the convention, it should have a doc block describing the covered methods
+
    * Non-testing methods should have a doc block with description. It includes data providers and any helper methods
 
 #### Things to include
 
 * An explanation of input arguments and return values if it is not obvious from their name and type.
-  
+
   This is applicable in the following cases:
 
   * There is more than one possible input/output type.
 
-    For example: `@return Config|null`.  
+    For example: `@return Config|null`.
     The DockBlock needs to explain what situations return `null`.
 
-    Another example: `@param FileInterface | null`.  
+    Another example: `@param FileInterface | null`.
     The DocBlock needs to explain what happens when the value of the parameter is `null`.
 
     Ideally, implementations such as these should be avoided.
@@ -377,7 +385,7 @@ Exceptions:
 
 #### Things to avoid
 
-* Copying the algorithm. 
+* Copying the algorithm.
   The algorithm must be self-explanatory and understood by reviewing the code and unit tests.
 * Information that is out of date or has the potential to become out of date.
 
@@ -419,7 +427,7 @@ protected function merge($configFiles)
 
 In general, use the `@throws` tag when the code uses *throw*:
 
-**Example of Throwing Exception Explicitly**  
+**Example of Throwing Exception Explicitly**
 {% highlight php startinline=true %}
 /**
  * Set an arbitrary value to specified element
@@ -526,7 +534,7 @@ class Profiler
 
 DocBlock template is a DocBlock that starts from `/**#@+*/` and ends with `/**#@-*/`.
 Templates are not supported by PHPDocumentor anymore. Therefore, they MUST NOT be used.
-  
+
 It's encouraged to replace existing DocBlock templates with regular DocBlock comments when the file is being modified.
 
 ## Structure of documentation space
@@ -550,7 +558,7 @@ Rules for usage of the tag:
 * Use `@inheritdoc` (notice no braces around) to indicate that the entire doc block should be inherited from the parent method.
 * Use the inline `{@inheritdoc}` tag (with braces around) in long descriptions to reuse the parent's long description. The tagged method MUST have its own short description.
 
-**DocBlock for the Intreface**
+**DocBlock for the Interface**
 {% highlight php startinline=true %}
 /**
  * Interface for mutable value object for integer values
@@ -565,7 +573,7 @@ interface MutableInterface
      * @return int
      */
     public function getVal();
- 
+
     /**
      * Set value
      *
@@ -590,7 +598,7 @@ class LimitedMutableClass implements MutableInterface
     public function getVal()
     {
     }
- 
+
     /**
      * Set value
      *
@@ -605,10 +613,10 @@ class LimitedMutableClass implements MutableInterface
 ### @api tag
 {:#api}
 
-The `@api` tag indicates the code is part of the public API and is subject to the [Magento Backward Compatibility Policy](../extension-dev-guide/backward-compatibility.html).
+The `@api` tag indicates the code is part of the public API and is subject to the [Magento Backward Compatibility Policy]({{page.baseurl}}/extension-dev-guide/backward-compatibility.html).
 
 The `@api` tag can be applied to a constant, a method, or to the entire class/interface.
- If the `@api` tag is applied at the file level, then all methods within the file are part of the public API.
+ If the `@api` tag is applied at the file level, then all methods within the file are part of the public {% glossarytooltip 786086f2-622b-4007-97fe-2c19e5283035 %}API{% endglossarytooltip %}.
 You do not need to annotate each method individually.
 
 See [Semantic Versioning 2.0.0](http://semver.org/) for information about changing and updating code while maintaining backward compatibility.
@@ -630,8 +638,8 @@ For example:
 /**
  * Get some object
  *
- * @deprecated Added to not break backward compatibility of the constructor signature 
- *             by injecting the new dependency directly. 
+ * @deprecated Added to not break backward compatibility of the constructor signature
+ *             by injecting the new dependency directly.
  *             The method can be removed in a future major release, when constructor signature can be changed
  * @return SomeObjectInterface
  */
@@ -651,7 +659,7 @@ public function setPrice($price)
 {
     ...
 }
- 
+
 /**
  * Set price for specified scope
  *
@@ -784,5 +792,3 @@ public function reorderChild($parentId, $childId, $position)
  * @see _insertChild() for position explanation
  */
 {% endhighlight %}
-
-

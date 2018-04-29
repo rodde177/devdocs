@@ -10,7 +10,7 @@ level3_menu_node: level3child
 level3_subgroup: versioning
 
 version: 2.0
-github_link: architecture/versioning_overview.md
+github_link: architecture/versioning_spec_format.md
 
 ---
 
@@ -29,7 +29,7 @@ Magento software versioning policy complies with these widely used specification
 
 Stable release versions are in the format `MAJOR.MINOR.PATCH`, where:
 
-* MAJOR indicates incompatible API changes
+* MAJOR indicates incompatible {% glossarytooltip 786086f2-622b-4007-97fe-2c19e5283035 %}API{% endglossarytooltip %} changes
 
 * MINOR indicates backward-compatible functionality has been added
 
@@ -39,25 +39,4 @@ Stable release versions are in the format `MAJOR.MINOR.PATCH`, where:
 The pre-release version format is: `MAJOR.MINOR.PATCH-<alpha | beta | rc>n`, where `alpha`, `beta` or `rc` are stability indications, as described in the `version_compare()` specification, and
 `n` is an increment number to distinguish releases of the non-stable versions.
 
-If you are an extension developer, familiarize yourself about the types of code changes that will initiate a MAJOR-, MINOR-, or PATCH- level change. See <a href="{{page.baseurl}}architecture/change_table.html">Changes to classes and method versions</a>.
-
-<h3>Schema version formats</h3>
-
-
-
-
-<h3>Related topics</h3>
-<a href="{{page.baseurl}}architecture/versioning_overview.html">Versioning policy overview</a>
-
-
-<a href="{{page.baseurl}}architecture/software_versions.html">Magento 2.0 software versions</a>
-
-<a href="{{page.baseurl}}architecture/version_store.html">Where is version information stored?</a>
-
-<a href="{{page.baseurl}}architecture/change_table.html">Changes to classes and method versions</a>
-
-
-<a href="{{page.baseurl}}architecture/back-compatibility.html">Backward compatibility</a>
-
-
-<a href="{{page.baseurl}}architecture/archi_perspectives/ABasics_intro.html">Architectural basics</a>
+If you are an {% glossarytooltip 55774db9-bf9d-40f3-83db-b10cc5ae3b68 %}extension{% endglossarytooltip %} developer, familiarize yourself about the types of code changes that will initiate a MAJOR-, MINOR-, or PATCH- level change.

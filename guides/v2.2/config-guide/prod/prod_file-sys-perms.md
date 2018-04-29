@@ -1,19 +1,22 @@
 ---
 layout: default
 group: config-guide
-subgroup: 90_prod
-title: Magento ownership and permissions in development and production
-menu_title: Magento ownership and permissions in development and production
+subgroup: 045_pipeline
+title: File systems access permissions
+menu_title: File systems access permissions
 menu_node:
-menu_order: 2
+menu_order: 3000
 version: 2.2
 github_link: config-guide/prod/prod_file-sys-perms.md
+functional_areas:
+  - Configuration
+  - System
+  - Setup
 ---
 
-## Overview of development and production file system ownership and permissions {#mage-owner}
-This section discusses how to set up the owner or owners of the Magento file system for a development and production system. Before you continue, review the concepts discussed in [Overview of file system ownership and permissions]({{page.baseurl}}install-gde/prereq/file-sys-perms-over.html).
+This section discusses how to set up the owner or owners of the Magento file system for a development and production system. Before you continue, review the concepts discussed in [Overview of file system ownership and permissions]({{page.baseurl}}/install-gde/prereq/file-sys-perms-over.html).
 
-This topic focuses on Magento development and production systems. If you're installing Magento, see [Set pre-installation ownership and permissions]({{page.baseurl}}install-gde/prereq/file-system-perms.html).
+This topic focuses on Magento development and production systems. If you're installing Magento, see [Set pre-installation ownership and permissions]({{page.baseurl}}/install-gde/prereq/file-system-perms.html).
 
 The sections that follow discuss requirements for one or two Magento file system owners. That means:
 
@@ -23,7 +26,7 @@ The sections that follow discuss requirements for one or two Magento file system
 
 	Instead, you have separate users:
 
-	*	The web server user, which runs the Magento Admin (including Setup Wizard) and storefront. 
+	*	The web server user, which runs the Magento Admin (including Setup Wizard) and storefront.
 
 	*	A *command-line user*, which is a local user account you can use to log in to the server. This user runs Magento cron jobs and command-line utilities.
 
@@ -35,7 +38,7 @@ Because having one file system owner is less secure, we recommend you deploy Mag
 ### Set up one owner for default or developer mode {#mage-owner-one-devel}
 In default or developer mode, the following directories must be writable by the user:
 
-*	`vendor` (Composer or compressed archive installation)
+*	`vendor`
 *	`app/etc`
 *	`pub/static`
 *	`var`
@@ -49,8 +52,8 @@ You can set these permissions using either the command line or a file manager ap
 ### Set up one owner for production mode {#mage-owner-one-prod}
 When you're ready to deploy your site to production, you should remove write access from files in the following directories for improved security:
 
-*	`vendor` (Composer or compressed archive installation)
-*	`app/code` (contributing developers only)
+*	`vendor`
+*	`app/code`
 *	`app/etc`
 *	`pub/static`
 *	Any other static resources
@@ -60,7 +63,7 @@ When you're ready to deploy your site to production, you should remove write acc
 
 To update components, install new components, or to upgrade the Magento software, all of the preceding directories must be read-write.
 
-#### Make files and directories read-only
+#### Make code files and directories read-only
 To remove writable permissions to files and directories from the web server user's group:
 
 1.	Log in to your Magento server.
@@ -70,12 +73,9 @@ To remove writable permissions to files and directories from the web server user
 		php bin/magento deploy:mode:set production
 3.	Enter the following command:
 
-		find var vendor pub/static app/etc generated/code generated/metadata var/view_preprocessed \( -type f -or -type d \) -exec chmod u-w {} \; && chmod o-rwx app/etc/env.php && chmod u+x bin/magento
-	<div class="bs-callout bs-callout-info" id="info">
-  		<p>If you're a contributing developer, replace <code>vendor</code> with <code>app/code</code> in the preceding commands. (A contributing developer <a href="{{page.baseurl}}install-gde/prereq/dev_install.html">clones the Magento 2 GitHub repository</a> so they can contribute to our codebase.)</p>
-	</div>
+		find app/code var vendor pub/static app/etc generated/code generated/metadata var/view_preprocessed \( -type f -or -type d \) -exec chmod u-w {} \; && chmod o-rwx app/etc/env.php && chmod u+x bin/magento
 
-#### Make files and directories writable:
+#### Make code files and directories writable:
 To make files and directories writable so you can update components and upgrade the Magento software:
 
 1.	Log in to your Magento server.
@@ -83,10 +83,10 @@ To make files and directories writable so you can update components and upgrade 
 3.	Enter the following commands:
 
 		chmod -R u+w .
-		
-	<div class="bs-callout bs-callout-info" id="info" markdown="1">
-  	If you're a contributing developer, replace `vendor` with `app/code` in the preceding commands. (A contributing developer <a href="{{page.baseurl}}install-gde/prereq/dev_install.html">clones the Magento 2 GitHub repository</a> so they can contribute to our codebase.)
-	</div>
+
+### Optionally set `magento_umask`
+
+{% include install/file-system-umask.md %}
 
 {% endcollapsibleh2 %}
 
@@ -104,7 +104,7 @@ If you use your own server (including a hosting provider's private server setup)
 	The command-line user is also referred to as the _Magento file system owner_.
 	</div>
 
-Because these users require access to the same files, we recommend you create a [shared group]({{page.baseurl}}install-gde/prereq/file-system-perms.html#mage-owner-about-group) to which they both belong. The following procedures assume you have already done this.
+Because these users require access to the same files, we recommend you create a [shared group]({{page.baseurl}}/install-gde/prereq/file-system-perms.html#mage-owner-about-group) to which they both belong. The following procedures assume you have already done this.
 
 See one of the following sections:
 
@@ -120,7 +120,7 @@ Files in the following directories must be writable by both users in developer a
 * `pub/media`
 * `app/etc`
 
-Set the [`setgid`](http://linuxg.net/how-to-set-the-setuid-and-setgid-bit-for-files-in-linux-and-unix/){:target="_blank"} bit on directories so permissions always inherit from the parent directory. 
+Set the [`setgid`](http://linuxg.net/how-to-set-the-setuid-and-setgid-bit-for-files-in-linux-and-unix/){:target="_blank"} bit on directories so permissions always inherit from the parent directory.
 
 <div class="bs-callout bs-callout-info" id="info" markdown="1">
 `setgid` applies to directories only, _not_ to files.
@@ -140,8 +140,8 @@ To set `setgid` and permissions for developer mode:
 ### Two Magento file system owners in production mode {#mage-owner-two-prod}
 When you're ready to deploy your site to production, you should remove write access from files in the following directories for improved security:
 
-*	`vendor` (Composer or compressed archive installation)
-*	`app/code` (contributing developers only)
+*	`vendor`
+*	`app/code`
 *	`app/etc`
 *	`lib`
 *	`pub/static`
@@ -150,7 +150,7 @@ When you're ready to deploy your site to production, you should remove write acc
 *	`generated/metadata`
 *	`var/view_preprocessed`
 
-#### Make files and directories read-only
+#### Make code files and directories read-only
 To remove writable permissions to files and directories from the web server user's group:
 
 1.	Log in to your Magento server.
@@ -160,28 +160,15 @@ To remove writable permissions to files and directories from the web server user
 		php bin/magento deploy:mode:set production
 3.	Enter the following command as a user with `root` privileges:
 
-		find pub/static app/etc generated/code generated/metadata var/view_preprocessed \( -type d -or -type f \) -exec chmod g-w {} \; && chmod o-rwx app/etc/env.php
-	<div class="bs-callout bs-callout-info" id="info">
-  		<p>If you're a contributing developer, replace <code>vendor</code> with <code>app/code</code> in the preceding commands. (A contributing developer <a href="{{page.baseurl}}install-gde/prereq/dev_install.html">clones the Magento 2 GitHub repository</a> so they can contribute to our codebase.)</p>
-	</div>
+		find app/code lib pub/static app/etc generated/code generated/metadata var/view_preprocessed \( -type d -or -type f \) -exec chmod g-w {} \; && chmod o-rwx app/etc/env.php
 
-#### Make files and directories writable
+#### Make code files and directories writable
 To make files and directories writable so you can update components and upgrade the Magento software:
 
 1.	Log in to your Magento server.
 2.	Change to your Magento installation directory.
 3.	Enter the following command:
 
-		find var generated vendor lib pub/static pub/media app/etc \( -type d -or -type f \) -exec chmod g+w {} \; && chmod o+rwx app/etc/env.php
+		find app/code lib var generated vendor pub/static pub/media app/etc \( -type d -or -type f \) -exec chmod g+w {} \; && chmod o+rwx app/etc/env.php
 
-	<div class="bs-callout bs-callout-info" id="info" markdown="1">
-  	If you're a contributing developer, replace `vendor` with `app/code` in the preceding commands. (A contributing developer <a href="{{page.baseurl}}install-gde/prereq/dev_install.html">clones the Magento 2 GitHub repository</a> so they can contribute to our codebase.)
-	</div>
 {% endcollapsibleh2 %}
-
-{% include install/file-system-umask.md %}
-
-
-*[contributing developer]: A developer who contributes code to the Magento 2 CE codebase
-*[contributing developers]: Developers who contribute code to the Magento 2 CE codebase
-

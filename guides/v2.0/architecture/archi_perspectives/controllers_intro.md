@@ -28,7 +28,7 @@ Layouts have output blocks
 
 ### Magento Front Controller
 
-Front controller design pattern has two parts
+Front controller {% glossarytooltip 53755359-9916-4677-bff2-f7d26025095a %}design pattern{% endglossarytooltip %} has two parts
 
 Tasks are highly limited, restricted to routing and dispatching.
 
@@ -40,6 +40,6 @@ Blocks and controllers are discussed extensively in the
 
 ## Related topics
 
-<a href="{{page.baseurl}}architecture/archi_perspectives/arch_diagrams.html">Architectural diagrams</a>
+<a href="{{page.baseurl}}/architecture/archi_perspectives/arch_diagrams.html">Architectural diagrams</a>
 
 Presentation Layer

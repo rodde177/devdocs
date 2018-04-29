@@ -1,5 +1,14 @@
 @import 'reset';
 @import 'variables';
+
+
+// Bootstrap components (run 'npm install' first)
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/utilities/embed';
+
+
+
 @import 'partials/buttons';
 @import 'partials/callouts';
 @import 'partials/code';
@@ -23,6 +32,15 @@
 @import 'partials/tabs';
 @import 'partials/breadcrumbs';
 @import 'partials/toc';
+@import 'partials/ee-only';
+@import 'partials/tutorial';
+@import 'partials/videos';
+@import 'partials/progress-bar';
+@import 'partials/tooltip';
+@import 'partials/mrg';
+@import 'partials/workflow';
+@import 'partials/left-navigation';
+
 
 .hide {
   display: none;
